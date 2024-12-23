@@ -1,6 +1,10 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("node:path");
 const started = require("electron-squirrel-startup")
+const { autoUpdater } = require("electron-updater");
+
+autoUpdater.autoDownload = false;
+autoUpdater.autoInstallOnAppQuit = true;
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -37,16 +41,23 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
+  autoUpdater.checkForUpdates().catch(err => console.log("check error:", err));
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
+  app.quit();
 });
 
+autoUpdater.on("update-available", (info) => {
+  console.log("update:", info);
+  autoUpdater.downloadUpdate();
+});
+autoUpdater.on("update-downloaded", (info) => {
+  console.log("update downloaded");
+});
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

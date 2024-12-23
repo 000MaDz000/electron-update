@@ -1,12 +1,30 @@
 {
   "name": "electron_update",
   "productName": "electron_update",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "My Electron application description",
   "main": "src/index.js",
   "repository": "https://github.com/000MaDz000/electron-update",
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
   "build": {
-    "productName": "electron_update"
+    "appId": "com.madz.com",
+    "productName": "electron_update",
+    "win": {
+      "target": "nsis",
+      "icon": "build/icons/512x512.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "runAfterFinish": true,
+      "warningsAsErrors": false,
+      "deleteAppDataOnUninstall": true
+    }
   },
   "scripts": {
     "start": "electron-forge start",
@@ -24,9 +42,9 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.6.0",
     "@electron-forge/plugin-fuses": "^7.6.0",
     "@electron/fuses": "^1.8.0",
+    "@types/node": "^22.10.2",
     "electron": "33.2.1",
-    "electron-builder": "^25.1.8",
-    "electron-updater": "^6.3.9"
+    "electron-builder": "^25.1.8"
   },
   "keywords": [],
   "author": {
@@ -35,6 +53,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.3.9"
   }
 }
