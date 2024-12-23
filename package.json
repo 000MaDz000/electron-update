@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": "src/index.js",
+  "repository": "https://github.com/000MaDz000/electron-update",
+  "build": {
+    "productName": "electron_update"
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
